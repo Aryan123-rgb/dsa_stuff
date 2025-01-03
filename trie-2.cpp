@@ -18,8 +18,7 @@ where prefix[i] is the XOR of elements from the start of the array to index i.
 
 To efficiently find the maximum XOR for all subarrays, we:
 1. Maintain a prefix XOR array.
-2. Use a trie data structure to store prefix XOR values.
-3. For each prefix XOR value, calculate the maximum XOR achievable using the trie.
+2. insert prefix_xor[r] ([.....r]) and then find the best l for this to be maximum.
 
 Input:
 - The first line contains an integer t, the number of test cases.
@@ -30,12 +29,18 @@ Output:
 - For each test case, print the maximum XOR value of any subarray.
 
 Example Input:
-1
+3
 5
-8 1 2 12 7
+1 2 3 4 5
+6
+7 14 6 8 6 65
+5
+74 14 5 6 9
 
 Example Output:
-15
+7
+79
+78
 */
 
 struct node

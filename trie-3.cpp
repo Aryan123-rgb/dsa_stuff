@@ -7,6 +7,42 @@ using namespace std;
 #define nline "\n"
 typedef long long ll;
 
+/*
+Question:
+Given an array `v` of size `n` and an integer `k`, find the number of subarrays
+whose XOR is less than `k`.
+
+Explanation of the Solution:
+1. **Prefix XOR**:
+   - We use the concept of prefix XOR to represent the XOR of any subarray.
+   - XOR of subarray `v[i...j]` can be calculated as `prefix_xor[j] ^ prefix_xor[i-1]`.
+
+2. **Using a Trie**:
+   - A trie is built to store the binary representation of prefix XOR values.
+   - for each value of r we query how many l's are there for which xor of the subarray is less than K`.
+
+3. **Key Steps**:
+   - Make sure to insert r, after querying for r, because we only calculate in one direction, that is by inserting r and calculating optimal l's
+
+4. **Time Complexity**:
+   - Trie insertion/query operation takes `O(32)` for 32-bit integers.
+   - For `n` elements, the complexity is `O(32 * n)` which is efficient.
+
+5. **Edge Cases**:
+   - Make sure to count to complete array [0.....r]
+
+Example Input:
+2
+5 3
+1 2 3 4 5
+10 472156
+645 45 8 6 45564 46868 89797 4566 65546 65467
+
+Example Output:
+8
+55
+*/
+
 struct node
 {
     node *left;  // 0 bit
@@ -133,7 +169,8 @@ void solve()
     {
         ans += tt.countSubarrayLessThanK(prefix_xor[l], k);
         tt.insert(prefix_xor[l]);
-        if(prefix_xor[l]<k){
+        if (prefix_xor[l] < k)
+        {
             ans++;
         }
     }
